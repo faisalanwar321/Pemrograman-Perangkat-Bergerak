@@ -3,6 +3,8 @@ import 'form_mahasiswa.dart';
 import 'tentang.dart';
 import 'pengaturan.dart';
 import 'daftar_mahasiswa.dart';
+import 'dosen_page.dart';
+import 'matkul_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,12 +20,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
-      home:MainWithDrawer(),
+      home: const MainWithDrawer(),
       routes: {
         '/form': (_) => const FormMahasiswaPage(),
         '/list': (_) => const DaftarMahasiswaPage(),
         '/tentang': (_) => const TentangPage(),
         '/pengaturan': (_) => const PengaturanPage(),
+        '/dosen': (_) => const DosenPage(),       // baru
+        '/matkul': (_) => const MatkulPage(),     // baru
       },
     );
   }
@@ -41,7 +45,7 @@ class MainWithDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              accountName: const Text('Demo Form Mahasiswa'),
+              accountName: const Text('Demo Form Mahasiswa & Dosen'),
               accountEmail: const Text('v1.0.0'),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -64,6 +68,24 @@ class MainWithDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, '/list');
               },
             ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Form Dosen'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/dosen');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.book),
+              title: const Text('Form Mata Kuliah'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/matkul');
+              },
+            ),
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.info),
               title: const Text('Tentang Aplikasi'),
@@ -89,7 +111,7 @@ class MainWithDrawer extends StatelessWidget {
 }
 
 class _HomeContent extends StatelessWidget {
-  const _HomeContent();
+  const _HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +125,7 @@ class _HomeContent extends StatelessWidget {
             children: const [
               Icon(Icons.menu, size: 48),
               SizedBox(height: 12),
-              Text('Tap ikon ☰ atau geser dari kiri untuk membuka Drawer.'),
+              Text('Gunakan Drawer untuk membuka menu.'),
             ],
           ),
         ),
@@ -111,8 +133,3 @@ class _HomeContent extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
